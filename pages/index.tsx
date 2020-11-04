@@ -19,14 +19,15 @@ async function getPosts() {
 }
 
 export default function IndexRoute({ content }) {
-  const { isLoading, error, data } = useQuery<Post[]>("post", getPosts);
-  const { data : data2 } = useQuery<Post[]>("post2", getPosts);
+  const { isLoading, error, data } = useQuery("post", getPosts);
+  const { data: data2 } = useQuery<Post[]>("post2", getPosts);
 
   return (
     <main>
       <ul>
-        {data?.posts &&
-          data?.posts.map((post) => <li key={post.id}>{post.title}</li>)}
+        {data?.posts.map((post) => (
+          <li key={post.id}>{post.title}</li>
+        ))}
       </ul>
       <Link href="/pagetwo">
         <a>Page Two</a>
