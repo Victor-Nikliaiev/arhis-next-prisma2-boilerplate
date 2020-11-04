@@ -6,3 +6,22 @@
 6) npm run dev
 ...
 7) Add to package.json a line to scripts "build": "next build"
+8) Installing Prisma CLI
+9) Creating some models like User, Posts 
+then
+
+10) In .env add your path to database DATABASE_URL=file:./sqlite.db
+11) then: npx prisma generate
+12) npx prisma migrate up --experimental
+13) npx prisma migrate save --experimental
+name: addUsersAndPosts
+
+14) npx prisma migrate up --experimental
+
+then....
+
+if we add something new to our models 
+
+15) npx prisma migrate save --experimental 
+and 
+16) npx prisma migrate up --experimental

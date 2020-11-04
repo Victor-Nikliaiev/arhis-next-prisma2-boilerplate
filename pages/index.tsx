@@ -1,27 +1,37 @@
 import Link from "next/link";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from 'next'
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { useQuery } from "react-query";
+import { Post } from "@prisma/client";
+import { ReactQueryDevtools } from "react-query-devtools";
+// export const getStaticProps: GetStaticProps = async (context) => {
+//   return {
+//     props: {
+//       content: "good dog",
+//     },
+//   };
+// };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
-  let res
-  let data = await fetch("https://arhis-webtoken-api.herokuapp.com/verify?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiQ29ycCBJbmMuIiwiaWF0IjoxNjA0MTk3MjA1LCJleHAiOjE2MDQ4MDIwMDV9.eRbEQu-zGx31sKDvVS1Uuhtjv3Sf08LB82MURM1DBBs").then((respond)=>{
-    return respond.json()
-  }).then( data => {
-    res = data
-  });
-
-  
-  return {
-    props: {
-      content: res.valid.toString()
-    }, // will be passed to the page component as props
-  }
+async function getPosts() {
+  const res = await fetch(`${window.location.href}api/posts`).then((data) =>
+    data.json()
+  );
+  return res;
 }
 
-export default function IndexRoute({content}) {
-  return <main>
-    Hello, Index {content}
-    <Link href="/pagetwo">
-      <a>Page two</a>
-    </Link>
-  </main>;
+export default function IndexRoute({ content }) {
+  const { isLoading, error, data } = useQuery<Post[]>("post", getPosts);
+  const { data : data2 } = useQuery<Post[]>("post2", getPosts);
+
+  return (
+    <main>
+      <ul>
+        {data?.posts &&
+          data?.posts.map((post) => <li key={post.id}>{post.title}</li>)}
+      </ul>
+      <Link href="/pagetwo">
+        <a>Page Two</a>
+      </Link>
+      <ReactQueryDevtools initialIsOpen />
+    </main>
+  );
 }
