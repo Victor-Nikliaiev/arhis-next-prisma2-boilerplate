@@ -9,4 +9,11 @@ export default async function create(
 ) {
   const posts = await prisma.post.findMany();
   res.status(200).json({ posts });
+  // const post = await prisma.post.create({
+  //   data: {
+  //     title: "Just third post",
+  //     body: "It's third one",
+  //   },
+  // });
+  // res.status(200).json(post);
 }
