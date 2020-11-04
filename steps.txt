@@ -5,6 +5,10 @@
 5) Add line to package.json like: "dev":"next dev"
 6) npm run dev
 ...
+GIT ()
+1) git init
+2) git checkout -b main
+
 7) Add to package.json a line to scripts "build": "next build"
 8) Installing Prisma CLI
 9) Creating some models like User, Posts 
