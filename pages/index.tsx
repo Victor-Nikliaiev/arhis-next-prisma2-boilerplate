@@ -12,7 +12,9 @@ import { ReactQueryDevtools } from "react-query-devtools";
 // };
 
 async function getPosts() {
-  const res = await fetch(`/api/posts`).then((data) => data.json());
+  const res = await fetch(`${window.location.href}api/posts`).then((data) =>
+    data.json()
+  );
   return res;
 }
 
